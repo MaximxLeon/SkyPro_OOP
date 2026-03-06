@@ -63,3 +63,55 @@ def test_multiple_categories(product_1, product_2):
 
     assert Category.category_count == 2
     assert Category.product_count == 2
+
+
+def test_price_setter_valid(product_1):
+    product_1.price = 130000
+    assert product_1.price == 130000
+
+
+def test_price_setter_invalid(product_1, capsys):
+    product_1.price = -100
+    captured = capsys.readouterr()
+    assert "Цена не должна быть нулевая или отрицательная" in captured.out
+    assert product_1.price == 120000.0
+
+
+def test_new_product_create():
+    data = {
+        "name": "Xiaomi 14",
+        "description": "Смартфон Xiaomi",
+        "price": 90000.0,
+        "quantity": 4
+    }
+
+    product = Product.new_product(data, [])
+
+    assert product.name == "Xiaomi 14"
+    assert product.description == "Смартфон Xiaomi"
+    assert product.price == 90000.0
+    assert product.quantity == 4
+
+
+def test_new_product_duplicate(product_1):
+    data = {
+        "name": "iPhone 15",
+        "description": "Смартфон Apple",
+        "price": 130000.0,
+        "quantity": 2
+    }
+
+    products = [product_1]
+
+    product = Product.new_product(data, products)
+
+    assert product.quantity == 7
+    assert product.price == 130000.0
+
+
+def test_add_product_to_category(category_with_products):
+    new_product = Product("Xiaomi 13", "Смартфон Xiaomi", 80000.0, 6)
+
+    category_with_products.add_product(new_product)
+
+    assert len(category_with_products.products) == 3
