@@ -3,7 +3,7 @@ class Product:
         self,
         name: str,
         description: str,
-        price: float, 
+        price: float,
         quantity: int
     ):
         self.name = name
