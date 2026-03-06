@@ -19,7 +19,8 @@ class Category:
     def products(self):
         """Геттер для просмотра списка товаров в виде одной строки"""
         return "\n".join(
-            f"{product.name}, {product.price} руб. Остаток: {product.quantity} шт."
+            f"{product.name}, {product.price} руб. "
+            f"Остаток: {product.quantity} шт."
             for product in self.__products
         )
 

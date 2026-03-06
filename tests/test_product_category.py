@@ -45,7 +45,7 @@ def test_product_repr(product_1):
 def test_category_initialization(category_with_products):
     assert category_with_products.name == "Смартфоны"
     assert category_with_products.description == "Разные модели смартфонов"
-    assert len(category_with_products.products) == 2
+    assert category_with_products.products.count("\n") + 1 == 2
 
 
 def test_category_counter(category_with_products):
@@ -111,7 +111,5 @@ def test_new_product_duplicate(product_1):
 
 def test_add_product_to_category(category_with_products):
     new_product = Product("Xiaomi 13", "Смартфон Xiaomi", 80000.0, 6)
-
     category_with_products.add_product(new_product)
-
-    assert len(category_with_products.products) == 3
+    assert category_with_products.products.count("\n") + 1 == 3
