@@ -17,14 +17,12 @@ class Category:
 
     @property
     def products(self):
-        """Геттер для просмотра списка товаров"""
-        products_list = []
-        for product in self.__products:
-            products_list.append(
-                f"{product.name}, {product.price} руб. "
-                f"Остаток: {product.quantity} шт."
-            )
-        return products_list
+        """Геттер для просмотра списка товаров в виде одной строки"""
+        return "\n".join(
+            f"{product.name}, {product.price} руб. "
+            f"Остаток: {product.quantity} шт."
+            for product in self.__products
+        )
 
     def add_product(self, product: Product):
         """Добавляет продукт в категорию
