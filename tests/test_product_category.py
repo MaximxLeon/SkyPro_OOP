@@ -85,29 +85,13 @@ def test_new_product_create():
         "quantity": 4
     }
 
-    product = Product.new_product(data, [])
+    product = Product.new_product(data)
 
     assert product.name == "Xiaomi 14"
     assert product.description == "Смартфон Xiaomi"
     assert product.price == 90000.0
     assert product.quantity == 4
-
-
-def test_new_product_duplicate(product_1):
-    data = {
-        "name": "iPhone 15",
-        "description": "Смартфон Apple",
-        "price": 130000.0,
-        "quantity": 2
-    }
-
-    products = [product_1]
-
-    product = Product.new_product(data, products)
-
-    assert product.quantity == 7
-    assert product.price == 130000.0
-
+    
 
 def test_add_product_to_category(category_with_products):
     new_product = Product("Xiaomi 13", "Смартфон Xiaomi", 80000.0, 6)
