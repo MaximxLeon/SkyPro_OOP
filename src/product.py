@@ -25,14 +25,8 @@ class Product:
             self.__price = new_price
 
     @classmethod
-    def new_product(cls, product_data: dict, products: list):
-        """Создаёт новый продукт или обновляет существующий."""
-
-        for product in products:
-            if product.name == product_data["name"]:
-                product.quantity += product_data["quantity"]
-                product.price = max(product.price, product_data["price"])
-                return product
+    def new_product(cls, product_data: dict):
+        """Создаёт новый продукт."""
 
         return cls(
             name=product_data["name"],
