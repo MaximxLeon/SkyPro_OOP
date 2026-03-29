@@ -28,15 +28,13 @@ class Category:
         )
 
     def add_product(self, product: Product):
-        """Добавляет продукт в категорию
-        и увеличивает общий счётчик продуктов."""
+        """Добавляет продукт в категорию и
+        увеличивает общий счётчик продуктов."""
         if isinstance(product, Product):
             self.__products.append(product)
             Category.product_count += 1
         else:
-            raise ValueError(
-                "Можно добавлять только объекты класса Product"
-            )
+            raise TypeError("Можно добавлять только объекты класса Product")
 
     def __repr__(self):
         return f"Category('{self.name}', products={self.products})"
