@@ -15,6 +15,9 @@ class Category:
         for product in products:
             self.add_product(product)
 
+    def __str__(self):
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
+
     @property
     def products(self):
         """Геттер для просмотра списка товаров в виде одной строки"""
@@ -34,14 +37,6 @@ class Category:
             raise ValueError(
                 "Можно добавлять только объекты класса Product"
             )
-
-    def __str__(self):
-        products_str = ", ".join([str(p) for p in self.products])
-        return (
-            f"Category: {self.name}\n"
-            f"Description: {self.description}\n"
-            f"Products: {products_str}"
-        )
 
     def __repr__(self):
         return f"Category('{self.name}', products={self.products})"
