@@ -20,7 +20,7 @@ class Product:
         raise TypeError("Можно складывать только объекты Product")
 
     def __str__(self):
-        return f"{self.name}, количество продуктов: {len(self.__products)} шт."
+        return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт."
 
     @property
     def price(self):

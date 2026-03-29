@@ -17,12 +17,7 @@ class Category:
 
     def __str__(self):
         total_quantity = sum(product.quantity for product in self.__products)
-        total_price = sum(
-            product.price * product.quantity
-            for product in self.__products
-            )
-
-        return f"{self.name}, {total_price} руб. Остаток: {total_quantity} шт."
+        return f"{self.name}, количество продуктов: {total_quantity} шт."
 
     @property
     def products(self):
