@@ -11,6 +11,17 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
+    def __add__(self, other):
+        if isinstance(other, Product):
+            return (
+                (self.price * self.quantity) +
+                (other.price * other.quantity)
+            )
+        raise TypeError("Можно складывать только объекты Product")
+
+    def __str__(self):
+        return f"{self.name}, количество продуктов: {len(self.__products)} шт."
+
     @property
     def price(self):
         """Геттер для получения цены продукта."""
@@ -34,9 +45,6 @@ class Product:
             price=product_data["price"],
             quantity=product_data["quantity"]
         )
-
-    def __str__(self):
-        return f"{self.name} — {self.price}₽, {self.quantity} шт."
 
     def __repr__(self):
         return f"Product('{self.name}', {self.price}, {self.quantity})"

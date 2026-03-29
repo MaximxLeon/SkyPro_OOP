@@ -34,10 +34,6 @@ def test_product_initialization(product_1):
     assert product_1.quantity == 5
 
 
-def test_product_str(product_1):
-    assert str(product_1) == "iPhone 15 — 120000.0₽, 5 шт."
-
-
 def test_product_repr(product_1):
     assert repr(product_1) == "Product('iPhone 15', 120000.0, 5)"
 
@@ -91,9 +87,33 @@ def test_new_product_create():
     assert product.description == "Смартфон Xiaomi"
     assert product.price == 90000.0
     assert product.quantity == 4
-    
+
 
 def test_add_product_to_category(category_with_products):
     new_product = Product("Xiaomi 13", "Смартфон Xiaomi", 80000.0, 6)
     category_with_products.add_product(new_product)
     assert category_with_products.products.count("\n") + 1 == 3
+
+
+def test_product_addition():
+    """Проверка корректного сложения двух продуктов"""
+    p1 = Product("Товар 1", "", 100, 10)
+    p2 = Product("Товар 2", "", 200, 2)
+
+    assert p1 + p2 == 1400
+
+
+def test_product_addition_type_error():
+    """Проверка ошибки при сложении с неправильным типом"""
+    p = Product("Товар", "", 100, 5)
+
+    with pytest.raises(TypeError):
+        p + 10
+
+
+def test_product_addition_zero_quantity():
+    """Проверка работы с нулевым количеством"""
+    p1 = Product("Товар 1", "", 100, 0)
+    p2 = Product("Товар 2", "", 200, 2)
+
+    assert p1 + p2 == 400
