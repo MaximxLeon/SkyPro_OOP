@@ -34,6 +34,10 @@ class Product(MixinProduct, BaseProduct):
 
     def __add__(self, other):
         if isinstance(other, Product):
+            if self.__class__ is not other.__class__:
+                raise TypeError(
+                    "Можно складывать только объекты одного класса"
+                )
             return (
                 (self.__price * self.quantity) +
                 (other.__price * other.quantity)
