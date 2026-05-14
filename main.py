@@ -25,6 +25,22 @@ if __name__ == '__main__':
         "Синий"
     )
 
+<<<<<<< HEAD
+    print(product1.name)
+    print(product1.description)
+    print(product1.price)
+    print(product1.quantity)
+
+    print(product2.name)
+    print(product2.description)
+    print(product2.price)
+    print(product2.quantity)
+
+    print(product3.name)
+    print(product3.description)
+    print(product3.price)
+    print(product3.quantity)
+=======
     print(smartphone1.name)
     print(smartphone1.description)
     print(smartphone1.price)
@@ -33,6 +49,7 @@ if __name__ == '__main__':
     print(smartphone1.model)
     print(smartphone1.memory)
     print(smartphone1.color)
+>>>>>>> origin/main
 
     print(smartphone2.name)
     print(smartphone2.description)
@@ -109,6 +126,34 @@ if __name__ == '__main__':
         [grass1, grass2]
     )
 
+<<<<<<< HEAD
+    print(category1.name == "Смартфоны")
+    print(category1.description)
+    print(len(category1.products))
+    print(category1.category_count)
+    print(category1.product_count)
+
+    product4 = Product(
+        "55\" QLED 4K",
+        "Фоновая подсветка",
+        123000.0,
+        7
+    )
+    category2 = Category(
+        "Телевизоры",
+        "Современный телевизор, который позволяет наслаждаться\
+        просмотром, станет вашим другом и помощником",
+        [product4]
+    )
+
+    print(category2.name)
+    print(category2.description)
+    print(len(category2.products))
+    print(category2.products)
+
+    print(Category.category_count)
+    print(Category.product_count)
+=======
     category_smartphones.add_product(smartphone3)
 
     print(category_smartphones.products)
@@ -121,3 +166,4 @@ if __name__ == '__main__':
         print("Возникла ошибка TypeError при добавлении не продукта")
     else:
         print("Не возникла ошибка TypeError при добавлении не продукта")
+>>>>>>> origin/main

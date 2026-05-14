@@ -1,123 +1,75 @@
 import pytest
 
 from src.category import Category
+<<<<<<< HEAD
+from src.product import BaseProduct, Product, Grass, Smartphone
+=======
 from src.lawn_grass import LawnGrass
 from src.product import Product
 from src.smartphone import Smartphone
+>>>>>>> origin/main
 
 
-@pytest.fixture
-def product_1():
-    return Product("iPhone 15", "Смартфон Apple", 120000.0, 5)
-
-
-@pytest.fixture
-def product_2():
-    return Product("Samsung S24", "Смартфон Samsung", 110000.0, 3)
-
-
-@pytest.fixture
-def category_with_products(product_1, product_2):
-    # Перед созданием сбрасываем счётчики
-    Category.category_count = 0
-    Category.product_count = 0
-
-    return Category(
-        "Смартфоны",
-        "Разные модели смартфонов",
-        [product_1, product_2]
-    )
-
-
-def test_product_initialization(product_1):
-    assert product_1.name == "iPhone 15"
-    assert product_1.description == "Смартфон Apple"
-    assert product_1.price == 120000.0
-    assert product_1.quantity == 5
-
-
-def test_product_repr(product_1):
-    assert repr(product_1) == "Product('iPhone 15', 120000.0, 5)"
-
-
-def test_category_initialization(category_with_products):
-    assert category_with_products.name == "Смартфоны"
-    assert category_with_products.description == "Разные модели смартфонов"
-    assert category_with_products.products.count("\n") + 1 == 2
-
-
-def test_category_counter(category_with_products):
-    assert Category.category_count == 1
-    assert Category.product_count == 2
-
-
-def test_multiple_categories(product_1, product_2):
-    # Сброс счётчиков
-    Category.category_count = 0
-    Category.product_count = 0
-
-    Category("Смартфоны", "Описание", [product_1])
-    Category("Ноутбуки", "Описание", [product_2])
-
-    assert Category.category_count == 2
-    assert Category.product_count == 2
-
-
-def test_price_setter_valid(product_1):
-    product_1.price = 130000
-    assert product_1.price == 130000
-
-
-def test_price_setter_invalid(product_1, capsys):
-    product_1.price = -100
-    captured = capsys.readouterr()
-    assert "Цена не должна быть нулевая или отрицательная" in captured.out
-    assert product_1.price == 120000.0
-
-
-def test_new_product_create():
-    data = {
-        "name": "Xiaomi 14",
-        "description": "Смартфон Xiaomi",
-        "price": 90000.0,
-        "quantity": 4
-    }
-
-    product = Product.new_product(data)
-
-    assert product.name == "Xiaomi 14"
-    assert product.description == "Смартфон Xiaomi"
-    assert product.price == 90000.0
-    assert product.quantity == 4
-
-
-def test_add_product_to_category(category_with_products):
-    new_product = Product("Xiaomi 13", "Смартфон Xiaomi", 80000.0, 6)
-    category_with_products.add_product(new_product)
-    assert category_with_products.products.count("\n") + 1 == 3
-
-
-def test_product_addition():
-    """Проверка корректного сложения двух продуктов"""
-    p1 = Product("Товар 1", "", 100, 10)
-    p2 = Product("Товар 2", "", 200, 2)
-
-    assert p1 + p2 == 1400
-
-
-def test_product_addition_type_error():
-    """Проверка ошибки при сложении с неправильным типом"""
-    p = Product("Товар", "", 100, 5)
-
+def test_base_product_cannot_be_instantiated():
     with pytest.raises(TypeError):
-        p + 10
+        BaseProduct()
 
 
-def test_product_addition_zero_quantity():
-    """Проверка работы с нулевым количеством"""
-    p1 = Product("Товар 1", "", 100, 0)
-    p2 = Product("Товар 2", "", 200, 2)
+def test_product_creation():
+    product = Product("iPhone", "Smartphone", 1000, 2)
 
+<<<<<<< HEAD
+    assert product.name == "iPhone"
+    assert product.get_description() == "Smartphone"
+    assert product.get_price() == 1000
+
+
+def test_smartphone_is_product():
+    phone = Smartphone("Samsung", "Phone", 500, 1)
+
+    assert isinstance(phone, Product)
+    assert phone.get_price() == 500
+
+
+def test_grass_is_product():
+    grass = Grass("Green", "Lawn grass", 50, 10)
+
+    assert isinstance(grass, Product)
+    assert grass.get_description() == "Lawn grass"
+
+
+def test_add_products():
+    p1 = Product("A", "desc", 100, 2)
+    p2 = Product("B", "desc", 200, 3)
+
+    result = p1 + p2
+
+    assert result == (100 * 2) + (200 * 3)
+
+
+def test_price_setter():
+    product = Product("A", "desc", 100, 1)
+
+    product.price = 200
+    assert product.price == 200
+
+
+def test_price_setter_invalid(capsys):
+    product = Product("A", "desc", 100, 1)
+
+    product.price = -10
+    captured = capsys.readouterr()
+
+    assert "Цена не должна быть нулевая или отрицательная" in captured.out
+    assert product.price == 100  # не изменился
+
+
+def test_repr_and_str():
+    product = Product("A", "desc", 100, 1)
+
+    assert "Product(" in repr(product)
+    assert "A" in str(product)
+=======
     assert p1 + p2 == 400
 
 
@@ -179,3 +131,4 @@ def test_add_invalid_object_to_category():
 
     with pytest.raises(TypeError):
         cat.add_product("not a product")
+>>>>>>> origin/main
