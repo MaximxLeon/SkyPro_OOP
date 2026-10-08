@@ -1,6 +1,4 @@
-from .product import Product
-
-
+from src.product import Product
 class Category:
     category_count = 0
     product_count = 0
@@ -16,12 +14,13 @@ class Category:
             self.add_product(product)
 
     def __str__(self):
-        total_quantity = sum(product.quantity for product in self.__products)
+        total_quantity = sum(
+            product.quantity for product in self.__products
+        )
         return f"{self.name}, количество продуктов: {total_quantity} шт."
 
     @property
     def products(self):
-        """Геттер для просмотра списка товаров в виде одной строки"""
         return "\n".join(
             f"{product.name}, {product.price} руб. "
             f"Остаток: {product.quantity} шт."
@@ -29,13 +28,24 @@ class Category:
         )
 
     def add_product(self, product: Product):
-        """Добавляет продукт в категорию и
-        увеличивает общий счётчик продуктов."""
         if isinstance(product, Product):
             self.__products.append(product)
             Category.product_count += 1
         else:
-            raise TypeError("Можно добавлять только объекты класса Product")
+            raise TypeError(
+                "Можно добавлять только объекты класса Product"
+            )
+
+    def middle_price(self):
+        try:
+            return sum(
+                product.price for product in self.__products
+            ) / len(self.__products)
+        except ZeroDivisionError:
+            return 0
 
     def __repr__(self):
-        return f"Category('{self.name}', products={self.products})"
+        return (
+            f"Category('{self.name}', "
+            f"products={self.products})"
+        )

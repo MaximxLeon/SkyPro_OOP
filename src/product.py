@@ -19,6 +19,11 @@ class MixinProduct:
 
 class Product(MixinProduct, BaseProduct):
     def __init__(self, name, description, price, quantity):
+        if quantity == 0:
+            raise ValueError(
+                "Товар с нулевым количеством не может быть добавлен"
+            )
+
         self.name = name
         self.description = description
         self.__price = price
@@ -63,11 +68,3 @@ class Product(MixinProduct, BaseProduct):
             f"Product('{self.name}',\
             '{self.description}', {self.__price}, {self.quantity})"
         )
-
-
-class Smartphone(Product):
-    pass
-
-
-class Grass(Product):
-    pass
